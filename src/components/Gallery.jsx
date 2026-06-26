@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { LeafTopRight } from "./Decorations";
 
 import yoga01 from "../assets/gallery/yoga01.webp";
 import yoga02 from "../assets/gallery/yoga02.webp";
@@ -150,8 +151,9 @@ function Gallery() {
   }, [filtered.length]);
 
   return (
-    <section id="gallery" className="section-pad gradient-soft">
-      <div className="container-editorial">
+    <section id="gallery" className="section-pad bg-soft-cream relative overflow-hidden">
+      <LeafTopRight className="text-navy/5" />
+      <div className="container-editorial relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -1,11 +1,13 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import VisionMission from "./components/VisionMission";
+import Philosophy from "./components/Philosophy";
+import Founders from "./components/Founders";
 import Services from "./components/Services";
-import Corporate from "./components/Corporate";
 import Gallery from "./components/Gallery";
 import Testimonials from "./components/Testimonials";
-import Plans from "./components/Plans";
+import Programs from "./components/Programs";
 import QuoteSection from "./components/QuoteSection";
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
@@ -17,11 +19,13 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <VisionMission />
+      <Philosophy />
+      <Founders />
       <Services />
-      <Corporate />
       <Gallery />
       <Testimonials />
-      <Plans />
+      <Programs />
       <QuoteSection />
       <FAQ />
       <Contact />

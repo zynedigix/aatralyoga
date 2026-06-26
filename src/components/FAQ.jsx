@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LeafBottomLeft } from "./Decorations";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import faqImage from "../assets/gallery/faq.webp";
@@ -78,8 +79,9 @@ function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="section-pad bg-ivory">
-      <div className="container-editorial">
+    <section id="faq" className="section-pad bg-soft-beige relative overflow-hidden">
+      <LeafBottomLeft className="text-gold/5" />
+      <div className="container-editorial relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 xl:gap-32 items-start">
           <motion.div
             initial={{ opacity: 0, x: -36 }}

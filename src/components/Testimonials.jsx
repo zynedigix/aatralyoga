@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AbstractYogaShape } from "./Decorations";
 import portrait1 from "../assets/gallery/testimonial-01.webp";
 import portrait2 from "../assets/gallery/testimonial-02.webp";
 import portrait3 from "../assets/gallery/testimonial-03.webp";
@@ -31,8 +32,9 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="section-pad bg-ivory overflow-hidden">
-      <div className="container-editorial">
+    <section id="testimonials" className="section-pad bg-light-green relative overflow-hidden">
+      <AbstractYogaShape className="top-10 left-[-5%] text-green/5" />
+      <div className="container-editorial relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
