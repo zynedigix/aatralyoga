@@ -22,9 +22,11 @@ function Footer() {
               className="h-12 lg:h-14 w-auto brightness-0 invert opacity-90"
             />
             <p className="type-body-sm text-white/75 mt-8 max-w-sm leading-[1.85]">
-              Premium yoga and corporate wellness in Chennai. Awaken your
-              inner balance through mindful practice.
-            </p>
+              AatralYoga – Empowering Life Through Yoga, Wellness & Mindfulness
+            </p><br />
+            <blockquote className="type-body-sm text-white/75 leading-[1.85] font-light italic">
+              "Transforming lives through authentic yoga practices, mindful movement, and holistic wellness."
+            </blockquote>
             <p className="type-eyebrow text-gold/60 mt-8">
               Awaken · Align · Achieve
             </p>
@@ -65,7 +67,7 @@ function Footer() {
                 href="tel:+919876543210"
                 className="block hover:text-gold transition-colors"
               >
-                +91 98765 43210
+                +91 98765 43210 / 9790531500
               </a>
             </div>
           </div>
