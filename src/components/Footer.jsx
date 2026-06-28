@@ -44,8 +44,9 @@ function Footer() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block type-body-sm text-white/78 hover:text-gold transition-colors duration-300"
+                  className="block text-white/78 hover:text-gold transition-colors"
                 >
+                  
                   {link.label}
                 </a>
               ))}
@@ -79,16 +80,6 @@ function Footer() {
                 +91 98765 43210 / 9790531500
               </a>
 
-              {/* Website */}
-
-              <a
-                href="https://www.aatralyoga.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block hover:text-gold transition-colors"
-              >
-                www.aatralyoga.com
-              </a>
 
               {/* Social Icons */}
 
