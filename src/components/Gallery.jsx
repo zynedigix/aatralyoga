@@ -28,18 +28,18 @@ const categories = [
 ];
 
 const galleryItems = [
-  { src: yoga01, category: "events", span: "md:col-span-2 md:row-span-2", tall: true },
-  { src: yoga02, category: "women", span: "md:col-span-1", tall: false },
-  { src: yoga03, category: "women", span: "md:col-span-1", tall: false },
-  { src: yoga04, category: "corporate", span: "md:col-span-2", tall: false },
-  { src: yoga05, category: "women", span: "md:col-span-1", tall: false },
-  { src: yoga06, category: "senior", span: "md:col-span-1 md:row-span-2", tall: true },
-  { src: yoga07, category: "kids", span: "md:col-span-1", tall: false },
-  { src: yoga08, category: "corporate", span: "md:col-span-1", tall: false },
-  { src: yoga09, category: "kids", span: "md:col-span-1", tall: false },
-  { src: yoga10, category: "senior", span: "md:col-span-1", tall: false },
-  { src: yoga11, category: "events", span: "md:col-span-2", tall: false },
-  { src: yoga12, category: "events", span: "md:col-span-1", tall: false },
+  { src: yoga01, category: "events" },
+  { src: yoga02, category: "women" },
+  { src: yoga03, category: "women" },
+  { src: yoga04, category: "corporate" },
+  { src: yoga05, category: "women" },
+  { src: yoga06, category: "senior" },
+  { src: yoga07, category: "kids" },
+  { src: yoga08, category: "corporate" },
+  { src: yoga09, category: "kids" },
+  { src: yoga10, category: "senior" },
+  { src: yoga11, category: "events" },
+  { src: yoga12, category: "events" },
 ];
 
 function GalleryModal({ items, index, onClose, onPrev, onNext }) {
@@ -197,7 +197,7 @@ function Gallery() {
 
         <motion.div
           layout
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-5 auto-rows-[160px] md:auto-rows-[220px] lg:auto-rows-[260px]"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-5"
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((item, index) => (
@@ -210,12 +210,12 @@ function Gallery() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.45, ease }}
                 onClick={() => openModal(index)}
-                className={`${item.span} overflow-hidden group relative cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50`}
+                className="aspect-square overflow-hidden group relative cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
               >
                 <img
                   src={item.src}
                   alt={`Aatral Yoga — ${categories.find((c) => c.id === item.category)?.label}`}
-                  className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out rounded-lg"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/15 transition-colors duration-500" />
