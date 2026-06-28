@@ -79,11 +79,11 @@ function Programs() {
                 </tbody>
               </table>
             </div>
-            <div className="mt-10">
+            {/* <div className="mt-10">
               <a href="#contact" className="inline-block bg-navy text-white px-8 py-3 type-small tracking-widest uppercase hover:bg-gold hover:text-white transition-colors duration-300">
                 Contact Us For Details
               </a>
-            </div>
+            </div> */}
           </motion.div>
         );
       case "02":
@@ -340,7 +340,7 @@ function Programs() {
           className="mt-20 lg:mt-32 text-center"
         >
           <p className="type-sub text-navy mb-8">Begin Your Yoga Journey With AatralYoga</p>
-          <a href="#contact" className="inline-block bg-navy text-white px-10 py-4 type-small font-medium tracking-widest uppercase hover:bg-gold hover:text-white transition-all duration-500 shadow-[0_10px_30px_-10px_rgba(11,53,91,0.5)] hover:shadow-[0_10px_40px_-10px_rgba(202,165,114,0.6)] hover:-translate-y-1">
+          <a href="#contact" className="inline-block bg-navy text-white px-10 py-4 type-small font-medium tracking-widest uppercase hover:bg-gold hover:text-white transition-all duration-500 shadow-[0_10px_30px_-10px_rgba(11,53,91,0.5)] hover:shadow-[0_10px_40px_-10px_rgba(202,165,114,0.6)] hover:-translate-y-1 rounded-lg">
             Book Your Session
           </a>
         </motion.div>

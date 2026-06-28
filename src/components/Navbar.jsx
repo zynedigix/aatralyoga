@@ -3,11 +3,10 @@ import { Menu, X } from "lucide-react";
 import logo from "../assets/aatral-yoga-logo.webp";
 
 const links = [
-  { label: "About", href: "#about" },
+  { label: "About Us", href: "#about" },
   { label: "Programs", href: "#programs" },
-  { label: "Corporate", href: "#corporate" },
   { label: "Gallery", href: "#gallery" },
-  { label: "Plans", href: "#plans" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 

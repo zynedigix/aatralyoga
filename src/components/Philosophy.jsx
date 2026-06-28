@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { AbstractYogaShape } from "./Decorations";
+import philosophyBg from "../assets/gallery/philosophy-bkg.webp";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -32,9 +33,20 @@ const philosophies = [
 
 function Philosophy() {
   return (
+    
     <section id="philosophy" className="section-pad bg-navy relative overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-50"
+        style={{
+          backgroundImage: `url(${philosophyBg})`,
+        }}
+      />
+
+  {/* Blue overlay to maintain AatralYoga navy tone */}
+  <div className="absolute inset-0 bg-navy/65" />
       <AbstractYogaShape className="bottom-0 right-[-5%] text-gold/5" />
-      <div className="container-editorial relative z-10">
+      <div className="container-editorial relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,8 +70,7 @@ function Philosophy() {
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
               custom={index}
-              className="bg-white/5 p-8 lg:p-10 border-t border-white/10 hover:border-gold transition-colors duration-500"
-            >
+              className="bg-white/5 p-8 lg:p-10 border-t border-white/10 hover:border-gold transition-colors duration-500 rounded-lg">
               <h3 className="type-sub text-white mb-4">{item.title}</h3>
               <p className="type-body-sm text-white/70">
                 {item.description}

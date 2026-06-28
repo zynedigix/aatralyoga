@@ -199,11 +199,11 @@ function Contact() {
                 </a>
               </div>
 
-              <div className="overflow-hidden rounded-sm shadow-xl border border-navy/6">
+              <div className="overflow-hidden rounded-sm shadow-xl border border-navy/6 ">
                 <iframe
                   title="Aatral Yoga studio location"
                   src={mapsEmbedUrl}
-                  className="w-full h-56 sm:h-64 lg:h-72 border-0"
+                  className="w-full h-56 sm:h-64 lg:h-72 border-0 rounded-lg"
                   loading="lazy"
                 />
               </div>

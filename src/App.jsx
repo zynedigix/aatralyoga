@@ -19,13 +19,12 @@ function App() {
       <Navbar />
       <Hero />
       <About />
-      <VisionMission />
       <Philosophy />
       <Founders />
-      <Services />
+      <Programs />
+      {/* <Services /> */}
       <Gallery />
       <Testimonials />
-      <Programs />
       <QuoteSection />
       <FAQ />
       <Contact />

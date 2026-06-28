@@ -78,7 +78,7 @@ function Founders() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             <div className="lg:col-span-4 sticky top-24">
               <div className="aspect-[4/5] bg-ivory border border-navy/10 flex items-center justify-center relative overflow-hidden shadow-sm">
-                <img src={archanaImg} alt="Archana J - Founder" className="w-full h-full object-cover" />
+                <img src={archanaImg} alt="Archana J - Founder" className="w-full h-full object-cover rounded-lg" />
                 <div className="absolute inset-0 bg-navy/5 mix-blend-multiply pointer-events-none" />
               </div>
               <div className="mt-8 text-center lg:text-left">
@@ -208,7 +208,7 @@ function Founders() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             <div className="lg:col-span-4 sticky top-24">
               <div className="aspect-[4/5] bg-ivory border border-navy/10 flex items-center justify-center relative overflow-hidden shadow-sm">
-                <img src={viswanathImg} alt="Viswanath Balaji J - Co-Founder" className="w-full h-full object-cover" />
+                <img src={viswanathImg} alt="Viswanath Balaji J - Co-Founder" className="w-full h-full object-cover rounded-lg" />
                 <div className="absolute inset-0 bg-navy/5 mix-blend-multiply pointer-events-none" />
               </div>
               <div className="mt-8 text-center lg:text-left">
