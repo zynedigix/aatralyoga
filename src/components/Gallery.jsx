@@ -12,7 +12,7 @@ import yoga06 from "../assets/gallery/yoga06.webp";
 import yoga07 from "../assets/gallery/yoga07.webp";
 import yoga08 from "../assets/gallery/yoga08.webp";
 import yoga09 from "../assets/gallery/yoga09.webp";
-
+ 
 const ease = [0.22, 1, 0.36, 1];
 
 const categories = [
