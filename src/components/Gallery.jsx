@@ -158,7 +158,7 @@ function Gallery() {
           <h2 className="type-section text-navy">Wellness Journey</h2>
           <p className="type-body text-navy/50 max-w-lg mt-8">
             Glimpses from studio sessions, corporate gatherings, and community
-            events across Chennai.
+            events.
           </p>
         </motion.div>
 

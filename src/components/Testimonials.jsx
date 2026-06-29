@@ -32,143 +32,86 @@ const testimonials = [
   },
 ];
 
-
 function Testimonials() {
-
   const [current, setCurrent] = useState(0);
 
-
   useEffect(() => {
-
     const timer = setInterval(() => {
-
-      setCurrent((prev) =>
-        prev === testimonials.length - 1 ? 0 : prev + 1
-      );
-
+      setCurrent((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
     }, 5000);
 
-
     return () => clearInterval(timer);
-
   }, []);
-
 
   const item = testimonials[current];
 
-
   return (
-
     <section
       id="testimonials"
       className="py-20 lg:py-28 bg-light-green relative overflow-hidden"
     >
-
       <AbstractYogaShape className="top-10 left-[-5%] text-green/5" />
 
-
       <div className="container-editorial relative z-10">
-
-
         {/* Heading */}
 
         <motion.div
-
           initial={{
-            opacity:0,
-            y:40
+            opacity: 0,
+            y: 40,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           viewport={{
-            once:true
+            once: true,
           }}
-
           transition={{
-            duration:0.8,
-            ease
+            duration: 0.8,
+            ease,
           }}
-
           className="mb-12 lg:mb-16"
-
         >
+          <p className="type-eyebrow text-gold mb-4">Voices</p>
 
-          <p className="type-eyebrow text-gold mb-4">
-            Voices
-          </p>
-
-
-          <h2 className="type-section text-navy">
-            Testimonials
-          </h2>
-
-
+          <h2 className="type-section text-navy">Testimonials</h2>
         </motion.div>
-
-
-
 
         {/* Slider */}
 
         <div className="relative min-h-[420px] flex items-center">
+          <AnimatePresence mode="wait">
+            <motion.article
+              key={item.name}
+              initial={{
+                opacity: 0,
+                x: 80,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              exit={{
+                opacity: 0,
+                x: -80,
+              }}
+              transition={{
+                duration: 0.7,
+                ease,
+              }}
+              className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full"
+            >
+              {/* Image */}
 
+              <div className="lg:col-span-5">
+                <div className="relative">
+                  <div className="absolute -inset-5" />
 
-        <AnimatePresence mode="wait">
-
-
-        <motion.article
-
-          key={item.name}
-
-          initial={{
-            opacity:0,
-            x:80
-          }}
-
-          animate={{
-            opacity:1,
-            x:0
-          }}
-
-          exit={{
-            opacity:0,
-            x:-80
-          }}
-
-          transition={{
-            duration:0.7,
-            ease
-          }}
-
-
-          className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full"
-
-
-        >
-
-
-          {/* Image */}
-
-          <div className="lg:col-span-5">
-
-
-            <div className="relative">
-
-
-              <div className="absolute -inset-5 rounded-full border border-gold/20" />
-
-
-              <img
-
-                src={item.image}
-
-                alt={item.name}
-
-                className="
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="
                 w-64
                 h-64
                 md:w-80
@@ -179,40 +122,27 @@ function Testimonials() {
                 rounded-full
                 mx-auto
                 "
+                  />
+                </div>
+              </div>
 
-              />
+              {/* Content */}
 
-
-            </div>
-
-
-          </div>
-
-
-
-
-          {/* Content */}
-
-
-          <div className="lg:col-span-7">
-
-
-            <span className="
+              <div className="lg:col-span-7">
+                <span
+                  className="
             font-display
             text-6xl
             lg:text-7xl
             text-gold/20
             leading-none
-            ">
+            "
+                >
+                  "
+                </span>
 
-              "
-
-            </span>
-
-
-            <blockquote
-
-              className="
+                <blockquote
+                  className="
               font-display
               text-xl
               md:text-2xl
@@ -223,93 +153,40 @@ function Testimonials() {
               -mt-4
               max-w-2xl
               "
+                >
+                  {item.quote}
+                </blockquote>
 
-            >
+                <div className="mt-8">
+                  <p className="type-sub text-navy font-medium">{item.name}</p>
 
-              {item.quote}
-
-
-            </blockquote>
-
-
-
-
-            <div className="mt-8">
-
-
-              <p className="type-sub text-navy font-medium">
-
-                {item.name}
-
-              </p>
-
-
-              <p className="type-body-sm text-navy/45 mt-2">
-
-                {item.role}
-
-              </p>
-
-
-            </div>
-
-
-          </div>
-
-
-        </motion.article>
-
-
-        </AnimatePresence>
-
-
+                  <p className="type-body-sm text-navy/45 mt-2">{item.role}</p>
+                </div>
+              </div>
+            </motion.article>
+          </AnimatePresence>
         </div>
-
-
-
 
         {/* Dots */}
 
         <div className="flex justify-center gap-3 mt-8">
-
-
-          {testimonials.map((_,index)=>(
-
+          {testimonials.map((_, index) => (
             <button
-
               key={index}
-
-              onClick={()=>setCurrent(index)}
-
+              onClick={() => setCurrent(index)}
               className={`
               w-3
               h-3
               rounded-full
               transition-all
-              ${
-                current===index
-                ? "bg-gold w-8"
-                :"bg-navy/20"
-              }
+              ${current === index ? "bg-gold w-8" : "bg-navy/20"}
               `}
-
             />
-
           ))}
-
-
         </div>
-
-
-
       </div>
-
-
     </section>
-
   );
-
 }
-
 
 export default Testimonials;

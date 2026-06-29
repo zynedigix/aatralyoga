@@ -208,10 +208,14 @@ function Programs() {
           >
             <h3 className="type-sub text-navy mb-8">Personal Yoga Training</h3>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-navy p-8 text-white relative overflow-hidden">
+              {/* <div className="bg-navy p-8 text-white relative overflow-hidden">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-2xl"></div>
                 <h4 className="type-body font-medium mb-4 relative z-10">One-to-One Sessions</h4>
                 <p className="type-body-sm text-white/80 relative z-10">Personal guidance based on individual goals and requirements.</p>
+              </div> */} 
+              <div className="bg-white p-8 border border-navy/5 shadow-sm">
+                <h4 className="type-body font-medium text-navy mb-4">One-to-One Session</h4>
+                <p className="type-body-sm text-navy/70">Personal guidance based on individual goals and requirements.</p>
               </div>
               <div className="bg-white p-8 border border-navy/5 shadow-sm">
                 <h4 className="type-body font-medium text-navy mb-4">Customized Programs</h4>

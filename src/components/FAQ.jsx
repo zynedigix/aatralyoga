@@ -9,7 +9,7 @@ const ease = [0.22, 1, 0.36, 1];
 const faqs = [
   {
     q: "Do I need prior yoga experience to join?",
-    a: "Not at all. Our Discovery sessions and Hatha programs are designed for complete beginners. Instructors adapt every class to your current level and physical comfort.",
+    a: "Not at all. Our sessions and programs are designed for complete beginners. Instructors adapt every class to your current level and physical comfort.",
   },
   {
     q: "What should I bring to a session?",
@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "Where are sessions held?",
-    a: "Studio sessions take place at our Chennai location. Corporate programs are conducted at your workplace, and select outdoor sessions are offered seasonally.",
+    a: 'Studio sessions and Online classes take place at our "AatralYoga" location',
   },
   {
     q: "How do I book my first session?",
