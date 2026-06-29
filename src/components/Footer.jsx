@@ -74,10 +74,10 @@ function Footer() {
               </a>
 
               <a
-                href="tel:+919876543210"
+                href="tel:+9342507302"
                 className="block hover:text-gold transition-colors"
               >
-                +91 98765 43210 / 9790531500
+                +91 9342507302 / 9790531500
               </a>
 
 

@@ -12,22 +12,22 @@ const testimonials = [
   {
     quote:
       "Aatral Yoga transformed how I approach each day. The sessions are deeply restorative — I leave feeling lighter, clearer, and more present than I have in years.",
-    name: "Priya Raman",
-    role: "Studio Member, Chennai",
+    name: "Dr.Suganya,",
+    role: "MBBS, DNB",
     image: portrait1,
   },
   {
     quote:
       "We brought Aatral into our office and the shift was immediate. Our team communicates better, handles stress with more grace, and genuinely looks forward to wellness days.",
-    name: "Arjun Mehta",
-    role: "HR Director, Tech Firm",
+    name: "Selva Kumar,",
+    role: "Professional Photographer",
     image: portrait2,
   },
   {
     quote:
       "The instructors hold space with such warmth and precision. Every class feels like a personal retreat — thoughtful, unhurried, and profoundly grounding.",
-    name: "Lakshmi Venkat",
-    role: "Monthly Practitioner",
+    name: "SriLakshmi",
+    role: "HomeMaker",
     image: portrait3,
   },
 ];

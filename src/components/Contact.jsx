@@ -183,13 +183,13 @@ function Contact() {
                 <div className="flex gap-5">
                   <Phone size={22} className="text-gold" />
 
-                  <a href="tel:+919876543210" className="type-body text-navy">
-                    +91 9342507302 / 9790531500
+                  <a href="tel:+9342507302" className="type-body text-navy">
+                    +91 9342507302 / 9790531500 
                   </a>
                 </div>
 
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/9342507302"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest"

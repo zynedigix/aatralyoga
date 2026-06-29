@@ -12,9 +12,6 @@ import yoga06 from "../assets/gallery/yoga06.webp";
 import yoga07 from "../assets/gallery/yoga07.webp";
 import yoga08 from "../assets/gallery/yoga08.webp";
 import yoga09 from "../assets/gallery/yoga09.webp";
-import yoga10 from "../assets/gallery/yoga10.webp";
-import yoga11 from "../assets/gallery/yoga11.webp";
-import yoga12 from "../assets/gallery/yoga12.webp";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -22,24 +19,20 @@ const categories = [
   { id: "all", label: "All" },
   { id: "corporate", label: "Corporate Wellness" },
   { id: "women", label: "Women Wellness" },
-  { id: "kids", label: "Kids Yoga" },
   { id: "senior", label: "Senior Wellness" },
   { id: "events", label: "Events" },
 ];
 
 const galleryItems = [
-  { src: yoga01, category: "events" },
-  { src: yoga02, category: "women" },
-  { src: yoga03, category: "women" },
-  { src: yoga04, category: "corporate" },
+  { src: yoga01, category: "corporate" },
+  { src: yoga02, category: "corporate" },
+  { src: yoga03, category: "corporate" },
+  { src: yoga04, category: "women" },
   { src: yoga05, category: "women" },
   { src: yoga06, category: "senior" },
-  { src: yoga07, category: "kids" },
-  { src: yoga08, category: "corporate" },
-  { src: yoga09, category: "kids" },
-  { src: yoga10, category: "senior" },
-  { src: yoga11, category: "events" },
-  { src: yoga12, category: "events" },
+  { src: yoga07, category: "senior" },
+  { src: yoga08, category: "events" },
+  { src: yoga09, category: "events" },
 ];
 
 function GalleryModal({ items, index, onClose, onPrev, onNext }) {

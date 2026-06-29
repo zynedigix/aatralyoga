@@ -55,28 +55,17 @@ function About() {
             custom={1}
           >
             <div className="space-y-6 type-body text-navy/80">
-              <p className="font-medium text-navy type-sub mb-8">
-                At AatralYoga, we believe that yoga is more than a physical practice—it is a path to strength, balance, self-awareness, and overall well-being.
+              {/* <p className="font-medium text-navy type-sub mb-8"> */}
+              <p>
+                At <strong>AatralYoga</strong>, we empower people of all ages and fitness levels to achieve strength, balance, and overall well-being through the transformative practice of yoga. Our foundation is built on the values of strength, energy, resilience, and inner power, reflected in the meaning of <strong>"Aatral."</strong> Through mindful movement, conscious breathing, and meditation, we guide every individual toward better physical health, mental clarity, emotional balance, and a lifelong yogic journey.
               </p>
               
               <p>
-                Our mission is to create a supportive and inspiring space where individuals of all ages and fitness levels can experience the transformative benefits of yoga.
-              </p>
-              
-              <p>
-                The name "Aatral" represents strength, energy, resilience, and inner power. These values form the foundation of everything we teach.
-              </p>
-              
-              <p>
-                Through mindful movement, conscious breathing, and meditation, we help our students develop not only physical fitness but also mental clarity and emotional balance.
-              </p>
-              
-              <p>
-                Whether your goal is to improve flexibility, manage stress, enhance fitness, or embark on a deeper yogic journey, AatralYoga is here to guide and support you every step of the way.
+                Our vision is to inspire healthier communities by making yoga accessible, meaningful, and transformative for everyone.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-y-6 gap-x-8 mt-12 pt-10 border-t border-navy/10">
+            {/* <div className="grid grid-cols-2 gap-y-6 gap-x-8 mt-12 pt-10 border-t border-navy/10">
               {[
                 "Strength & Balance",
                 "Mindful Movement",
@@ -90,7 +79,7 @@ function About() {
                   <span className="type-body-sm font-medium text-navy">{point}</span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </motion.div>
         </div>
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LeafBottomLeft } from "./Decorations";
-import archanaImg from "../assets/gallery/founder-Archana.jpg";
-import viswanathImg from "../assets/gallery/founder-Viswanath.jpg";
+import archanaImg from "../assets/gallery/Founder-Archana.webp";
+import viswanathImg from "../assets/gallery/Founder-Viswanath.webp";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -77,7 +77,7 @@ function Founders() {
         >
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             <div className="lg:col-span-4 sticky top-24">
-              <div className="aspect-[4/5] bg-ivory border border-navy/10 flex items-center justify-center relative overflow-hidden shadow-sm">
+              <div className="aspect-[4/4] flex items-center justify-center relative overflow-hidden rounded-full">
                 <img src={archanaImg} alt="Archana J - Founder" className="w-full h-full object-cover rounded-lg" />
                 <div className="absolute inset-0 bg-navy/5 mix-blend-multiply pointer-events-none" />
               </div>
@@ -207,7 +207,7 @@ function Founders() {
         >
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             <div className="lg:col-span-4 sticky top-24">
-              <div className="aspect-[4/5] bg-ivory border border-navy/10 flex items-center justify-center relative overflow-hidden shadow-sm">
+              <div className="aspect-[4/4] flex items-center justify-center relative overflow-hidden rounded-full ">
                 <img src={viswanathImg} alt="Viswanath Balaji J - Co-Founder" className="w-full h-full object-cover rounded-lg" />
                 <div className="absolute inset-0 bg-navy/5 mix-blend-multiply pointer-events-none" />
               </div>
