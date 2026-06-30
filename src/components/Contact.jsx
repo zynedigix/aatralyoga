@@ -76,7 +76,7 @@ function Contact() {
 
             <h2 className="type-section text-navy">Book Your Session</h2>
 
-            <p className="type-body text-navy/65 max-w-lg mt-8">
+            <p className="type-body text-navy/65 max-w-full mt-8">
               Take the first step toward balance. Share your details and we'll
               craft a wellness experience tailored to you.
             </p>
@@ -184,19 +184,70 @@ function Contact() {
                   <Phone size={22} className="text-gold" />
 
                   <a href="tel:+9342507302" className="type-body text-navy">
-                    +91 9342507302 / 9790531500 
+                    +91 9342507302 / 9790531500
                   </a>
                 </div>
 
-                <a
-                  href="https://wa.me/9342507302"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest"
-                >
-                  <MessageCircle size={18} />
-                  WhatsApp
-                </a>
+                <div className="flex items-center gap-4">
+
+  {/* WhatsApp */}
+  <a
+    href="https://wa.me/9342507302"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest hover:opacity-90 transition-all"
+  >
+    <MessageCircle size={18} />
+    WhatsApp
+  </a>
+
+
+  {/* YouTube */}
+  <a
+    href="https://www.youtube.com/@Aatral_Yoga"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+    style={{ borderColor: "var(--color-navy)" }}
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z" />
+    </svg>
+  </a>
+
+
+  {/* Instagram */}
+  <a
+    href="https://www.instagram.com/aatral_yoga/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+    style={{ borderColor: "var(--color-navy)" }}
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  </a>
+
+</div>
+
+
               </div>
 
               <div className="overflow-hidden rounded-sm shadow-xl border border-navy/6 ">

@@ -12,6 +12,11 @@ import yoga06 from "../assets/gallery/yoga06.webp";
 import yoga07 from "../assets/gallery/yoga07.webp";
 import yoga08 from "../assets/gallery/yoga08.webp";
 import yoga09 from "../assets/gallery/yoga09.webp";
+import yoga10 from "../assets/gallery/yoga10.webp";
+import yoga11 from "../assets/gallery/yoga11.webp";
+import yoga12 from "../assets/gallery/yoga12.webp";
+import yoga13 from "../assets/gallery/yoga13.webp";
+import yoga14 from "../assets/gallery/yoga14.webp";
  
 const ease = [0.22, 1, 0.36, 1];
 
@@ -21,6 +26,8 @@ const categories = [
   { id: "women", label: "Women Wellness" },
   { id: "senior", label: "Senior Wellness" },
   { id: "events", label: "Events" },
+  { id: "kids", label: "Kids" },
+  { id: "mens", label: "Mens Wellness" },
 ];
 
 const galleryItems = [
@@ -33,6 +40,11 @@ const galleryItems = [
   { src: yoga07, category: "senior" },
   { src: yoga08, category: "events" },
   { src: yoga09, category: "events" },
+  { src: yoga10, category: "kids" },
+  { src: yoga11, category: "mens" },
+  { src: yoga12, category: "mens" },
+  { src: yoga13, category: "mens" },
+  { src: yoga14, category: "mens" },
 ];
 
 function GalleryModal({ items, index, onClose, onPrev, onNext }) {

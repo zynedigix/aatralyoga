@@ -245,7 +245,8 @@ function Programs() {
           className="text-center mb-16 lg:mb-24"
         >
           <p className="type-eyebrow text-gold mb-6">Classes Details & Yoga Programs</p>
-          <h2 className="type-section text-navy mb-8 max-w-4xl mx-auto leading-tight">Explore our thoughtfully designed yoga programs created to support strength, flexibility, mindfulness, and complete wellness.</h2>
+          <h2 className="type-section text-navy mb-8 max-w-4xl mx-auto leading-tight">Explore our Process</h2>
+          <h3 className="type-sub text-navy mb-8">Designed Yoga programs supporting strength, flexibility, mindfulness, and complete wellness.</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {["Online Yoga", "Personal Training", "Corporate Wellness", "Group Classes"].map((badge, i) => (
               <span key={i} className="px-4 py-1.5 bg-white border border-navy/10 rounded-full type-small text-navy/70 flex items-center gap-2 shadow-sm">

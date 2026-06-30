@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "../assets/aatral-yoga-logo.webp";
+import logo from "../assets/aatralyoga-logo-new.webp";
 
 const links = [
   { label: "About Us", href: "#about" },

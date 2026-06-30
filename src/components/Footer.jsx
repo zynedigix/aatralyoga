@@ -2,6 +2,7 @@ import logo from "../assets/aatral-yoga-logo.webp";
 
 const links = [
   { label: "About Us", href: "#about" },
+  { label: "Founders", href: "#founders" },
   { label: "Programs", href: "#programs" },
   { label: "Gallery", href: "#gallery" },
   { label: "FAQ", href: "#faq" },

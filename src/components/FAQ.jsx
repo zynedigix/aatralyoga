@@ -79,28 +79,30 @@ function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="section-pad bg-soft-beige relative overflow-hidden">
+    <section
+      id="faq"
+      className="section-pad bg-soft-beige relative overflow-hidden"
+    >
       <LeafBottomLeft className="text-gold/5" />
       <div className="container-editorial relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 xl:gap-32 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-28 items-start">
           <motion.div
             initial={{ opacity: 0, x: -36 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease }}
-            className="lg:sticky lg:top-36"
+            className="self-start"
           >
             <p className="type-eyebrow text-gold mb-6">Questions</p>
-            <h2 className="type-section text-navy mb-12 lg:mb-16">
-              Frequently Asked
-            </h2>
+
+            <h2 className="type-section text-navy mb-10 lg:mb-12">FAQs</h2>
 
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0)" }}
               whileInView={{ clipPath: "inset(0% 0 0 0)" }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease }}
-              className="overflow-hidden aspect-[4/5] max-w-md shadow-[0_24px_48px_-12px_rgba(11,53,91,0.12)]"
+              className="overflow-hidden aspect-[4/4] max-w-md shadow-[0_24px_48px_-12px_rgba(11,53,91,0.12)]"
             >
               <img
                 src={faqImage}
