@@ -24,12 +24,39 @@ function Contact() {
     phone: "",
     message: "",
   });
+  const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
+
+  // Validation helpers
+  const validateName = (name) => {
+    if (!name.trim()) return "Name is required";
+    const regex = /^[a-zA-Z\s]+$/;
+    return regex.test(name.trim()) ? "" : "This is not a valid name";
+  };
+
+  const validateEmail = (email) => {
+    if (!email.trim()) return "Email is required";
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email.trim()) ? "" : "Invalid email address";
+  };
+
+  const validatePhone = (phone) => {
+    if (!phone.trim()) return "Phone is required";
+    const regex = /^[0-9]{7,15}$/;
+    return regex.test(phone.trim()) ? "" : "Invalid phone number";
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
-      alert("Please fill all required fields.");
+    const newErrors = {
+      name: validateName(formData.name),
+      email: validateEmail(formData.email),
+      phone: validatePhone(formData.phone),
+    };
+    setErrors(newErrors);
+
+    // If any validation errors exist, stop submission
+    if (Object.values(newErrors).some((msg) => msg)) {
       return;
     }
 
@@ -111,6 +138,9 @@ function Contact() {
                 }
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
+              {errors.name ? (
+                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+              ) : null}
 
               <input
                 type="email"
@@ -127,6 +157,9 @@ function Contact() {
                 }
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
 
               <input
                 type="tel"
@@ -143,6 +176,9 @@ function Contact() {
                 }
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+              )}
 
               <textarea
                 name="message"
@@ -202,62 +238,62 @@ function Contact() {
 
                 <div className="flex items-center gap-4">
 
-  {/* WhatsApp */}
-  <a
-    href="https://wa.me/9342507302"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest hover:opacity-90 transition-all"
-  >
-    <MessageCircle size={18} />
-    WhatsApp
-  </a>
+                  {/* WhatsApp */}
+                  <a
+                    href="https://wa.me/9342507302"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest hover:opacity-90 transition-all"
+                  >
+                    <MessageCircle size={18} />
+                    WhatsApp
+                  </a>
 
 
-  {/* YouTube */}
-  <a
-    href="https://www.youtube.com/@Aatral_Yoga"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
-    style={{ borderColor: "var(--color-navy)" }}
-  >
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
-      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z" />
-    </svg>
-  </a>
+                  {/* YouTube */}
+                  <a
+                    href="https://www.youtube.com/@Aatral_Yoga"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+                    style={{ borderColor: "var(--color-navy)" }}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z" />
+                    </svg>
+                  </a>
 
 
-  {/* Instagram */}
-  <a
-    href="https://www.instagram.com/aatral_yoga/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
-    style={{ borderColor: "var(--color-navy)" }}
-  >
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <rect x="2" y="2" width="20" height="20" rx="5" />
+                  {/* Instagram */}
+                  <a
+                    href="https://www.instagram.com/aatral_yoga/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+                    style={{ borderColor: "var(--color-navy)" }}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="2" y="2" width="20" height="20" rx="5" />
 
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
 
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  </a>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                  </a>
 
-</div>
+                </div>
 
 
               </div>
