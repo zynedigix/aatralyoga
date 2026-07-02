@@ -16,15 +16,11 @@ const mapsQuery = encodeURIComponent(
 const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 function Contact() {
-  const [showSuccess, setShowSuccess] = useState(false);
-
   const [errors, setErrors] = useState({
     name: "",
     email: "",
     phone: "",
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -46,55 +42,70 @@ function Contact() {
       [name]: "",
     }));
   };
+  const newErrors = {
+    name: "",
+    email: "",
+    phone: "",
+  };
+
+  if (!formData.name.trim()) {
+    newErrors.name = "Name is required";
+  } else if (!/^[A-Za-z ]+$/.test(formData.name.trim())) {
+    newErrors.name = "Name should contain only letters";
+  } else if (formData.name.trim().length < 3) {
+    newErrors.name = "Name must be at least 3 characters";
+  }
+
+  if (!formData.email.trim()) {
+    newErrors.email = "Email is required";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    newErrors.email = "Please enter a valid email";
+  }
+
+  const newErrors = {
+    name: "",
+    email: "",
+    phone: "",
+  };
+
+  if (!formData.name.trim()) {
+    newErrors.name = "Name is required";
+  } else if (!/^[A-Za-z ]+$/.test(formData.name.trim())) {
+    newErrors.name = "Name should contain only letters";
+  } else if (formData.name.trim().length < 3) {
+    newErrors.name = "Name must be at least 3 characters";
+  }
+
+  if (!formData.email.trim()) {
+    newErrors.email = "Email is required";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    newErrors.email = "Please enter a valid email";
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newErrors = {
-      name: "",
-      email: "",
-      phone: "",
-    };
+    const newErrors = { name: "", email: "", phone: "" };
 
-      if (!formData.name.trim()) {
-        newErrors.name = "Name is required";
-      } else if (!/^[A-Za-z ]+$/.test(formData.name)) {
-        newErrors.name = "Name should contain only letters";
-      } else if (formData.name.trim().length < 3) {
-        newErrors.name = "Name must be at least 3 characters";
-      }
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    else if (!/^[A-Za-z ]+$/.test(formData.name.trim()))
+      newErrors.name = "Name should contain only letters";
+    else if (formData.name.trim().length < 3)
+      newErrors.name = "Name must be at least 3 characters";
 
-      if (!formData.email.trim()) {
-        newErrors.email = "Email is required";
-      } else if (
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
-      ) {
-        newErrors.email = "Please enter a valid email address";
-      }
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim()))
+      newErrors.email = "Please enter a valid email";
 
-      if (!formData.phone.trim()) {
-        newErrors.phone = "Phone number is required";
-      } else if (!/^\d+$/.test(formData.phone)) {
-        newErrors.phone = "Phone number must contain only digits";
-      } else if (formData.phone.length !== 10) {
-        newErrors.phone = "Phone number must be exactly 10 digits";
-      }
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    else if (!/^\d{10}$/.test(formData.phone.trim()))
+      newErrors.phone = "Phone number must be exactly 10 digits";
 
-      const hasErrors = Object.values(newErrors).some(error => error !== "");
+    setErrors(newErrors);
 
-      setErrors(newErrors);
-
-      if (
-        newErrors.name ||
-        newErrors.email ||
-        newErrors.phone
-      ) {
-        return;
-      }
-
+    if (newErrors.name || newErrors.email || newErrors.phone) return;
 
     try {
-      setIsSubmitting(true);
       const response = await fetch("/api/send-email", {
         method: "POST",
 
@@ -107,11 +118,7 @@ function Contact() {
 
       const data = await response.json();
 
-      console.log("API Response:", data);
-
-      setIsSubmitting(false);
-
-      if (response.ok && data.success) {
+      if (data.success) {
         setShowSuccess(true);
 
         setFormData({
@@ -121,16 +128,12 @@ function Contact() {
           message: "",
         });
       } else {
-        console.error(error);
-        alert(error.message);
+        alert("Something went wrong. Please try again.");
       }
     } catch (error) {
-      setIsSubmitting(false);
       alert("Something went wrong. Please try again.");
     }
   };
-
-  
 
   return (
     <>
@@ -168,22 +171,11 @@ function Contact() {
               <input
                 name="name"
                 type="text"
+                placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-6 py-5 type-body bg-transparent border-b outline-none transition-colors
-                  ${
-                    errors.name
-                      ? "border-red-500"
-                      : "border-navy/12 focus:border-gold/60"
-                  }`}
-                placeholder="Your Name"
+                className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
-
-              {errors.name && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.name}
-                </p>
-              )}
 
               <input
                 name="email"
@@ -193,11 +185,8 @@ function Contact() {
                 onChange={handleChange}
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
-
-              {errors.email && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.email}
-                </p>
+              {errors.phone && (
+                <p className="mt-2 text-sm text-red-500">{errors.phone}</p>
               )}
 
               <input
@@ -209,10 +198,8 @@ function Contact() {
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
 
-              {errors.phone && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.phone}
-                </p>
+              {errors.email && (
+                <p className="mt-2 text-sm text-red-500">{errors.email}</p>
               )}
 
               <textarea
@@ -226,10 +213,9 @@ function Contact() {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
                 className="w-full bg-navy text-white py-5 type-small font-medium tracking-widest uppercase hover:bg-navy-light transition-colors duration-500 mt-4 rounded-full cursor-pointer"
               >
-                {isSubmitting ? "Sending..." : "Send Enquiry"}
+                Send Enquiry
               </button>
             </motion.form>
 
@@ -267,65 +253,59 @@ function Contact() {
                 </div>
 
                 <div className="flex items-center gap-4">
+                  {/* WhatsApp */}
+                  <a
+                    href="https://wa.me/9342507302"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest hover:opacity-90 transition-all"
+                  >
+                    <MessageCircle size={18} />
+                    WhatsApp
+                  </a>
 
-  {/* WhatsApp */}
-  <a
-    href="https://wa.me/9342507302"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest hover:opacity-90 transition-all"
-  >
-    <MessageCircle size={18} />
-    WhatsApp
-  </a>
+                  {/* YouTube */}
+                  <a
+                    href="https://www.youtube.com/@Aatral_Yoga"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+                    style={{ borderColor: "var(--color-navy)" }}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z" />
+                    </svg>
+                  </a>
 
+                  {/* Instagram */}
+                  <a
+                    href="https://www.instagram.com/aatral_yoga/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+                    style={{ borderColor: "var(--color-navy)" }}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="2" y="2" width="20" height="20" rx="5" />
 
-  {/* YouTube */}
-  <a
-    href="https://www.youtube.com/@Aatral_Yoga"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
-    style={{ borderColor: "var(--color-navy)" }}
-  >
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
-      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z" />
-    </svg>
-  </a>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
 
-
-  {/* Instagram */}
-  <a
-    href="https://www.instagram.com/aatral_yoga/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
-    style={{ borderColor: "var(--color-navy)" }}
-  >
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  </a>
-
-</div>
-
-
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                  </a>
+                </div>
               </div>
 
               <div className="overflow-hidden rounded-sm shadow-xl border border-navy/6 ">
