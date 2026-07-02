@@ -27,7 +27,7 @@ const categories = [
   { id: "senior", label: "Senior Wellness" },
   { id: "events", label: "Events" },
   { id: "kids", label: "Kids" },
-  { id: "mens", label: "Mens Wellness" },
+  { id: "mens", label: "Men's Wellness" },
 ];
 
 const galleryItems = [

@@ -18,6 +18,14 @@ const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&t=&z=15&ie=UTF
 function Contact() {
   const [showSuccess, setShowSuccess] = useState(false);
 
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,10 +33,68 @@ function Contact() {
     message: "",
   });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const newErrors = {
+      name: "",
+      email: "",
+      phone: "",
+    };
+
+      if (!formData.name.trim()) {
+        newErrors.name = "Name is required";
+      } else if (!/^[A-Za-z ]+$/.test(formData.name)) {
+        newErrors.name = "Name should contain only letters";
+      } else if (formData.name.trim().length < 3) {
+        newErrors.name = "Name must be at least 3 characters";
+      }
+
+      if (!formData.email.trim()) {
+        newErrors.email = "Email is required";
+      } else if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+      ) {
+        newErrors.email = "Please enter a valid email address";
+      }
+
+      if (!formData.phone.trim()) {
+        newErrors.phone = "Phone number is required";
+      } else if (!/^\d+$/.test(formData.phone)) {
+        newErrors.phone = "Phone number must contain only digits";
+      } else if (formData.phone.length !== 10) {
+        newErrors.phone = "Phone number must be exactly 10 digits";
+      }
+
+      const hasErrors = Object.values(newErrors).some(error => error !== "");
+
+      setErrors(newErrors);
+
+      if (
+        newErrors.name ||
+        newErrors.email ||
+        newErrors.phone
+      ) {
+        return;
+      }
+
+
     try {
+      setIsSubmitting(true);
       const response = await fetch("/api/send-email", {
         method: "POST",
 
@@ -41,7 +107,11 @@ function Contact() {
 
       const data = await response.json();
 
-      if (data.success) {
+      console.log("API Response:", data);
+
+      setIsSubmitting(false);
+
+      if (response.ok && data.success) {
         setShowSuccess(true);
 
         setFormData({
@@ -51,12 +121,16 @@ function Contact() {
           message: "",
         });
       } else {
-        alert("Something went wrong. Please try again.");
+        console.error(error);
+        alert(error.message);
       }
     } catch (error) {
+      setIsSubmitting(false);
       alert("Something went wrong. Please try again.");
     }
   };
+
+  
 
   return (
     <>
@@ -92,66 +166,70 @@ function Contact() {
               className="space-y-6"
             >
               <input
+                name="name"
                 type="text"
-                placeholder="Your Name"
                 value={formData.name}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-
-                    name: e.target.value,
-                  })
-                }
-                className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
+                onChange={handleChange}
+                className={`w-full px-6 py-5 type-body bg-transparent border-b outline-none transition-colors
+                  ${
+                    errors.name
+                      ? "border-red-500"
+                      : "border-navy/12 focus:border-gold/60"
+                  }`}
+                placeholder="Your Name"
               />
 
+              {errors.name && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.name}
+                </p>
+              )}
+
               <input
+                name="email"
                 type="email"
                 placeholder="Email Address"
                 value={formData.email}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-
-                    email: e.target.value,
-                  })
-                }
+                onChange={handleChange}
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
 
+              {errors.email && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.email}
+                </p>
+              )}
+
               <input
+                name="phone"
                 type="tel"
                 placeholder="Phone Number"
                 value={formData.phone}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-
-                    phone: e.target.value,
-                  })
-                }
+                onChange={handleChange}
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
 
+              {errors.phone && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.phone}
+                </p>
+              )}
+
               <textarea
+                name="message"
                 rows="4"
                 placeholder="Tell us about your wellness goals"
                 value={formData.message}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-
-                    message: e.target.value,
-                  })
-                }
+                onChange={handleChange}
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40 resize-none"
               />
 
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full bg-navy text-white py-5 type-small font-medium tracking-widest uppercase hover:bg-navy-light transition-colors duration-500 mt-4 rounded-full cursor-pointer"
               >
-                Send Enquiry
+                {isSubmitting ? "Sending..." : "Send Enquiry"}
               </button>
             </motion.form>
 

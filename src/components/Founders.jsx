@@ -140,7 +140,7 @@ function Founders() {
               </p>
               
               <p className="type-small text-navy/60 mt-3 max-w-sm">
-                M.C.A., Certified Yoga & Naturopathy Instructor
+                M.C.A., Certified Yoga & Naturopathy Instructor, Bharat Sevak Samaj, promoted by Government of India
               </p>
 
             </div>

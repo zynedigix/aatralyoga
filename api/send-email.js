@@ -1,62 +1,71 @@
 import { Resend } from "resend";
 
-const resend = new Resend(
-    process.env.RESEND_API_KEY || "re_M1azTgyW_4417EKRaDrotVb5kpb4vK9Pp"
-  );
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
-
+  // Allow only POST requests
   if (req.method !== "POST") {
     return res.status(405).json({
-      message: "Method not allowed"
+      success: false,
+      message: "Method Not Allowed",
     });
   }
-
-
-  const {name, email, phone, message} = req.body;
-
 
   try {
+    const { name, email, phone, message } = req.body;
 
-    await resend.emails.send({
+    // Server-side validation
+    if (!name || !email || !phone) {
+      return res.status(400).json({
+        success: false,
+        message: "Required fields are missing.",
+      });
+    }
 
+    const response = await resend.emails.send({
       from: "Aatral Yoga <noreply@aatralyoga.com>",
-
-      to: [
-        "contact@aatralyoga.com"
-      ],
-
-      subject:
-      `New Yoga Enquiry from ${name}`,
-
+      to: ["contact@aatralyoga.com"],
+      replyTo: email,
+      subject: `New Yoga Enquiry from ${name}`,
       html: `
-        <h2>New Contact Request</h2>
+        <h2>New Yoga Enquiry</h2>
 
-        <p><b>Name:</b> ${name}</p>
+        <table cellpadding="8" cellspacing="0" border="0">
+          <tr>
+            <td><strong>Name</strong></td>
+            <td>${name}</td>
+          </tr>
 
-        <p><b>Email:</b> ${email}</p>
+          <tr>
+            <td><strong>Email</strong></td>
+            <td>${email}</td>
+          </tr>
 
-        <p><b>Phone:</b> ${phone}</p>
+          <tr>
+            <td><strong>Phone</strong></td>
+            <td>${phone}</td>
+          </tr>
 
-        <p><b>Message:</b></p>
-
-        <p>${message}</p>
-
-      `
+          <tr>
+            <td><strong>Message</strong></td>
+            <td>${message || "-"}</td>
+          </tr>
+        </table>
+      `,
     });
 
+    console.log("Email sent:", response);
 
     return res.status(200).json({
-      success:true
+      success: true,
+      message: "Email sent successfully",
     });
-
-
-  } catch(error){
+  } catch (error) {
+    console.error("Resend Error:", error);
 
     return res.status(500).json({
-      error:error.message
+      success: false,
+      message: error.message,
     });
-
   }
-
 }
