@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const response = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: "Aatral Yoga <noreply@aatralyoga.com>",
       to: ["contact@aatralyoga.com"],
       replyTo: email,
@@ -54,18 +54,26 @@ export default async function handler(req, res) {
       `,
     });
 
-    console.log("Email sent:", response);
+    if (error) {
+      console.error("Resend API Error:", error);
+      return res.status(400).json({
+        success: false,
+        message: error.message || "Failed to send email",
+      });
+    }
+
+    console.log("Email sent successfully:", data);
 
     return res.status(200).json({
       success: true,
       message: "Email sent successfully",
     });
   } catch (error) {
-    console.error("Resend Error:", error);
+    console.error("Server Error:", error);
 
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Internal server error",
     });
   }
-}
+}

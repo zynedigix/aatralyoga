@@ -16,11 +16,7 @@ const mapsQuery = encodeURIComponent(
 const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 function Contact() {
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -29,81 +25,13 @@ function Contact() {
     message: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
-  };
-  const newErrors = {
-    name: "",
-    email: "",
-    phone: "",
-  };
-
-  if (!formData.name.trim()) {
-    newErrors.name = "Name is required";
-  } else if (!/^[A-Za-z ]+$/.test(formData.name.trim())) {
-    newErrors.name = "Name should contain only letters";
-  } else if (formData.name.trim().length < 3) {
-    newErrors.name = "Name must be at least 3 characters";
-  }
-
-  if (!formData.email.trim()) {
-    newErrors.email = "Email is required";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-    newErrors.email = "Please enter a valid email";
-  }
-
-  const newErrors = {
-    name: "",
-    email: "",
-    phone: "",
-  };
-
-  if (!formData.name.trim()) {
-    newErrors.name = "Name is required";
-  } else if (!/^[A-Za-z ]+$/.test(formData.name.trim())) {
-    newErrors.name = "Name should contain only letters";
-  } else if (formData.name.trim().length < 3) {
-    newErrors.name = "Name must be at least 3 characters";
-  }
-
-  if (!formData.email.trim()) {
-    newErrors.email = "Email is required";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-    newErrors.email = "Please enter a valid email";
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newErrors = { name: "", email: "", phone: "" };
-
-    if (!formData.name.trim()) newErrors.name = "Name is required";
-    else if (!/^[A-Za-z ]+$/.test(formData.name.trim()))
-      newErrors.name = "Name should contain only letters";
-    else if (formData.name.trim().length < 3)
-      newErrors.name = "Name must be at least 3 characters";
-
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim()))
-      newErrors.email = "Please enter a valid email";
-
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    else if (!/^\d{10}$/.test(formData.phone.trim()))
-      newErrors.phone = "Phone number must be exactly 10 digits";
-
-    setErrors(newErrors);
-
-    if (newErrors.name || newErrors.email || newErrors.phone) return;
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+      alert("Please fill all required fields.");
+      return;
+    }
 
     try {
       const response = await fetch("/api/send-email", {
@@ -128,10 +56,10 @@ function Contact() {
           message: "",
         });
       } else {
-        alert("Something went wrong. Please try again.");
+        alert(data.message || "Something went wrong. Please try again.");
       }
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      alert("Network error. Please try again.");
     }
   };
 
@@ -169,45 +97,65 @@ function Contact() {
               className="space-y-6"
             >
               <input
-                name="name"
                 type="text"
+                name="name"
+                required
                 placeholder="Your Name"
                 value={formData.name}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+
+                    name: e.target.value,
+                  })
+                }
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
 
               <input
-                name="email"
                 type="email"
+                name="email"
+                required
                 placeholder="Email Address"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+
+                    email: e.target.value,
+                  })
+                }
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
-              {errors.phone && (
-                <p className="mt-2 text-sm text-red-500">{errors.phone}</p>
-              )}
 
               <input
-                name="phone"
                 type="tel"
+                name="phone"
+                required
                 placeholder="Phone Number"
                 value={formData.phone}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+
+                    phone: e.target.value,
+                  })
+                }
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40"
               />
-
-              {errors.email && (
-                <p className="mt-2 text-sm text-red-500">{errors.email}</p>
-              )}
 
               <textarea
                 name="message"
                 rows="4"
                 placeholder="Tell us about your wellness goals"
                 value={formData.message}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+
+                    message: e.target.value,
+                  })
+                }
                 className="w-full px-6 py-5 type-body bg-transparent border-b border-navy/12 outline-none focus:border-gold/60 transition-colors text-navy placeholder:text-navy/40 resize-none"
               />
 
@@ -253,59 +201,65 @@ function Contact() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  {/* WhatsApp */}
-                  <a
-                    href="https://wa.me/9342507302"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest hover:opacity-90 transition-all"
-                  >
-                    <MessageCircle size={18} />
-                    WhatsApp
-                  </a>
 
-                  {/* YouTube */}
-                  <a
-                    href="https://www.youtube.com/@Aatral_Yoga"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
-                    style={{ borderColor: "var(--color-navy)" }}
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z" />
-                    </svg>
-                  </a>
+  {/* WhatsApp */}
+  <a
+    href="https://wa.me/9342507302"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-3 bg-green text-white px-8 py-4 rounded-full type-small uppercase tracking-widest hover:opacity-90 transition-all"
+  >
+    <MessageCircle size={18} />
+    WhatsApp
+  </a>
 
-                  {/* Instagram */}
-                  <a
-                    href="https://www.instagram.com/aatral_yoga/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
-                    style={{ borderColor: "var(--color-navy)" }}
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <rect x="2" y="2" width="20" height="20" rx="5" />
 
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+  {/* YouTube */}
+  <a
+    href="https://www.youtube.com/@Aatral_Yoga"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+    style={{ borderColor: "var(--color-navy)" }}
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z" />
+    </svg>
+  </a>
 
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                    </svg>
-                  </a>
-                </div>
+
+  {/* Instagram */}
+  <a
+    href="https://www.instagram.com/aatral_yoga/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-12 h-12 rounded-full border flex items-center justify-center text-navy hover:text-gold hover:bg-navy/5 transition-all duration-300"
+    style={{ borderColor: "var(--color-navy)" }}
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  </a>
+
+</div>
+
+
               </div>
 
               <div className="overflow-hidden rounded-sm shadow-xl border border-navy/6 ">
