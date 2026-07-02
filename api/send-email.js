@@ -1,8 +1,17 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export default async function handler(req, res) {
+  // Check if API key exists to prevent crash on boot
+  if (!process.env.RESEND_API_KEY) {
+    console.error("Missing RESEND_API_KEY environment variable.");
+    return res.status(500).json({
+      success: false,
+      message: "Server Configuration Error: Missing Resend API Key. Please add it to Vercel Environment Variables.",
+    });
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   // Allow only POST requests
   if (req.method !== "POST") {
     return res.status(405).json({
