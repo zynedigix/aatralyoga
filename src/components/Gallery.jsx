@@ -56,8 +56,10 @@ function GalleryModal({ items, index, onClose, onPrev, onNext }) {
       if (e.key === "ArrowLeft") onPrev();
       if (e.key === "ArrowRight") onNext();
     };
+
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKey);
+
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKey);
@@ -70,18 +72,9 @@ function GalleryModal({ items, index, onClose, onPrev, onNext }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35, ease }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy/95 backdrop-blur-sm surface-dark"
+      className="fixed inset-0 z-[100] bg-navy/95 backdrop-blur-sm flex items-center justify-center px-6 py-10"
       onClick={onClose}
     >
-      <button
-        type="button"
-        onClick={onClose}
-        className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/80 hover:text-white transition-colors z-10 p-2"
-        aria-label="Close gallery"
-      >
-        <X size={28} />
-      </button>
-
       {items.length > 1 && (
         <>
           <button
@@ -90,21 +83,28 @@ function GalleryModal({ items, index, onClose, onPrev, onNext }) {
               e.stopPropagation();
               onPrev();
             }}
-            className="absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 text-white/75 hover:text-white transition-colors p-3 z-10"
+            className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2
+              bg-black/40 hover:bg-black/60
+              rounded-full p-3 text-white
+              transition-all z-30 cursor-pointer"
             aria-label="Previous image"
           >
-            <ChevronLeft size={36} />
+            <ChevronLeft size={34} />
           </button>
+
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               onNext();
             }}
-            className="absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 text-white/75 hover:text-white transition-colors p-3 z-10"
+            className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2
+              bg-black/40 hover:bg-black/60
+              rounded-full p-3 text-white
+              transition-all z-30"
             aria-label="Next image"
           >
-            <ChevronRight size={36} />
+            <ChevronRight size={34} />
           </button>
         </>
       )}
@@ -115,15 +115,53 @@ function GalleryModal({ items, index, onClose, onPrev, onNext }) {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.96 }}
         transition={{ duration: 0.4, ease }}
-        className="relative max-w-[90vw] max-h-[85vh] lg:max-w-[85vw] lg:max-h-[88vh]"
         onClick={(e) => e.stopPropagation()}
+        className="relative"
       >
+        {/* Close Button attached to image */}
+        <button
+          type="button"
+          onClick={onClose}
+          className="
+          absolute
+          top-3
+          right-3
+          z-40
+          w-11
+          h-11
+          rounded-full
+          bg-white/95
+          text-navy
+          shadow-xl
+          hover:bg-gold
+          hover:text-white
+          transition-all
+          flex
+          items-center
+          justify-center
+          cursor-pointer
+          "
+          aria-label="Close gallery"
+        >
+          <X size={26} />
+        </button>
+
         <img
           src={item.src}
           alt="Aatral Yoga gallery preview"
-          className="max-w-full max-h-[85vh] lg:max-h-[88vh] object-contain"
+          className="
+            max-w-[88vw]
+            max-h-[65vh]
+            lg:max-w-[80vw]
+            lg:max-h-[68vh]
+            xl:max-h-[70vh]
+            object-contain
+            rounded-lg
+            shadow-2xl
+          "
         />
-        <p className="absolute bottom-0 left-0 right-0 text-center type-small text-white/72 pt-4">
+
+        <p className="text-center text-white/70 mt-5 type-small">
           {index + 1} / {items.length}
         </p>
       </motion.div>
@@ -164,11 +202,11 @@ function Gallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease }}
-          className="mb-14 lg:mb-20 xl:mb-24"
+          className="mb-4 lg:mb-4 xl:mb-10"
         >
           <p className="type-eyebrow text-gold mb-6">In Motion</p>
           <h2 className="type-section text-navy">Wellness Journey</h2>
-          <p className="type-body text-navy/50 max-w-lg mt-8">
+          <p className="type-body text-navy/65 max-w-full mt-8">
             Glimpses from studio sessions, corporate gatherings, and community
             events.
           </p>

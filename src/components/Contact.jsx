@@ -70,7 +70,7 @@ function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease }}
-            className="mb-16 lg:mb-20 xl:mb-24"
+            className="mb-4 lg:mb-4 xl:mb-10"
           >
             <p className="type-eyebrow text-gold mb-6">Begin Here</p>
 
