@@ -303,13 +303,23 @@ export function useHeroSequence(containerRef, { reducedMotion = false } = {}) {
   
   }, [schedulePaint]);
 
-  // Initial preload: first frame + background batch loading
+  // Initial preload: load all frames
   useEffect(() => {
     let cancelled = false;
 
     async function init() {
       resizeCanvas();
-      await loadFrame(0);
+
+      for (let start = 0; start < FRAME_COUNT; start += PRELOAD_BATCH) {
+        if (cancelled) break;
+
+        const batch = Array.from(
+          { length: Math.min(PRELOAD_BATCH, FRAME_COUNT - start) },
+          (_, i) => loadFrame(start + i),
+        );
+        await Promise.all(batch);
+      }
+
       if (cancelled) return;
 
       setIsReady(true);
@@ -347,16 +357,6 @@ export function useHeroSequence(containerRef, { reducedMotion = false } = {}) {
           height: sizeRef.current.height,
           frameLoaded: Boolean(imagesRef.current[0]?.complete),
         });
-      }
-
-      for (let start = 1; start < FRAME_COUNT; start += PRELOAD_BATCH) {
-        if (cancelled) break;
-
-        const batch = Array.from(
-          { length: Math.min(PRELOAD_BATCH, FRAME_COUNT - start) },
-          (_, i) => loadFrame(start + i),
-        );
-        await Promise.all(batch);
       }
     }
 
