@@ -2,8 +2,8 @@ import { Resend } from "resend";
 
 export default async function handler(req, res) {
   // Check if API key exists to prevent crash on boot
-  if (!process.env.RESEND_API_KEY) {
-    console.error("Missing RESEND_API_KEY environment variable.");
+  if (!process.env.RESEND_API_AATRAL_KEY) {
+    console.error("Missing RESEND_API_AATRAL_KEY environment variable.");
     return res.status(500).json({
       success: false,
       message:
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     });
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(process.env.RESEND_API_AATRAL_KEY);
 
   // Allow only POST requests
   if (req.method !== "POST") {
