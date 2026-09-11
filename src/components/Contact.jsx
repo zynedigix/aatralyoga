@@ -221,10 +221,10 @@ function Contact() {
                   <Mail size={22} className="text-gold" />
 
                   <a
-                    href="mailto:contact@aatralyoga.com"
+                    href="mailto:aatralyoga03@gmail.com"
                     className="type-body text-navy"
                   >
-                    contact@aatralyoga.com
+                    aatralyoga03@gmail.com
                   </a>
                 </div>
 
