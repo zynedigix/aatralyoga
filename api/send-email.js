@@ -6,7 +6,8 @@ export default async function handler(req, res) {
     console.error("Missing RESEND_API_KEY environment variable.");
     return res.status(500).json({
       success: false,
-      message: "Server Configuration Error: Missing Resend API Key. Please add it to Vercel Environment Variables.",
+      message:
+        "Server Configuration Error: Missing Resend API Key. Please add it to Vercel Environment Variables.",
     });
   }
 
@@ -33,7 +34,7 @@ export default async function handler(req, res) {
 
     const { data, error } = await resend.emails.send({
       from: "Aatral Yoga <noreply@aatralyoga.com>",
-      to: ["contact@aatralyoga.com"],
+      to: ["aatralyoga03@gmail.com"],
       replyTo: email,
       subject: `New Yoga Enquiry from ${name}`,
       html: `
@@ -85,4 +86,4 @@ export default async function handler(req, res) {
       message: "Internal server error",
     });
   }
-}
+}
