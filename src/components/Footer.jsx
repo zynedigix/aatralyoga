@@ -68,10 +68,10 @@ function Footer() {
               </address>
 
               <a
-                href="mailto:contact@aatralyoga.com"
+                href="mailto:aatralyoga03@gmail.com"
                 className="block hover:text-gold transition-colors"
               >
-                contact@aatralyoga.com
+                aatralyoga03@gmail.com
               </a>
 
               <a
